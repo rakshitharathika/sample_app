@@ -1,0 +1,66 @@
+<!-- <div class="container">
+	<h1>Content from: categories page</h1>
+</div>
+ -->
+
+ <div class="container">
+<div class="col-sm-8 col-sm-offset-2">
+  <!--   <div class="page-header"><h1>Post data using angularJS</h1></div> -->
+    <!-- FORM -->
+    <form>
+    <div class="form-group">
+        <label>title</label>
+        <input type="text" name="title" class="form-control" ng-model="vm.newblog.title">
+        <!-- <span ng-show="errorName">{{errorName}}</span> -->
+    </div>
+
+      <div class="form-group">
+         <label for="sel2">user</label>
+           <select class="form-control" name="user" ng-model="vm.newblog.user" required >
+            <option ng-value="user.id" ng-repeat="user in vm.users">{{ user.name }}</option> </select>
+         </div>
+
+          <div class="form-group">
+         <label for="sel2">categories</label>
+           <select class="form-control" name="categories" ng-model="vm.newblog.categories" required >
+            <option ng-value="categories.id" ng-repeat="categories in vm.categorieses">{{ categories.name }}</option> </select>
+         </div>
+
+
+          <div class="form-group">
+         <label for="sel2">tags</label>
+           <select class="form-control" name="tags" ng-model="vm.newblog.tags" required >
+            <option ng-value="tags.id" ng-repeat="tags in vm.tag">{{ tags.name }}</option> </select>
+         </div>
+
+
+          <div class="form-group">
+         <label for="sel2">location</label>
+           <select class="form-control" name="location" ng-model="vm.newblog.location" required >
+            <option ng-value="location.id" ng-repeat="location in vm.locations">{{ location.name }}</option> </select>
+         </div>
+
+
+          <div class="form-group">
+         <label for="sel2">department</label>
+           <select class="form-control" name="department" ng-model="vm.newblog.department" required >
+            <option ng-value="department.id" ng-repeat="department in vm.departments">{{ department.name }}</option> </select>
+         </div>
+
+
+          <div class="form-group">
+         <label for="sel2">team</label>
+           <select class="form-control" name="team" ng-model="vm.newblog.team" required >
+            <option ng-value="team.id" ng-repeat="team in vm.teams">{{ team.name }}</option> </select>
+         </div>
+    
+    <!--  <div class="form-group">
+        <label>title</label>
+        <textarea type="text" name="description" class="form-control" ng-model="vm.blog.title">
+        </textarea> -->
+        <!-- <span ng-show="errorName">{{errorName}}</span> -->
+    
+       <button type="submit" class="btn btn-primary" ng-click="vm.createblog()">create</button>
+    </form>
+</div>
+</div>

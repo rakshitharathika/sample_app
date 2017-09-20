@@ -1,0 +1,62 @@
+{
+  "generator-angm": {
+    "appName": "balaji",
+    "angularCookies": true,
+    "angularAnimate": true,
+    "angularSanitize": true,
+    "angularBootstrap": true,
+    "modules": [
+      {
+        "name": "createuser"
+      },
+      {
+        "name": "categories"
+      },
+      {
+        "name": "tags"
+      },
+      {
+        "name": "locations"
+      },
+      {
+        "name": "departments"
+      },
+      {
+        "name": "teams"
+      },
+      {
+        "name": "blogs"
+      }
+    ],
+    "menu": [
+      {
+        "link": "createuser",
+        "title": "Createuser"
+      },
+      {
+        "link": "categories",
+        "title": "Categories"
+      },
+      {
+        "link": "tags",
+        "title": "Tags"
+      },
+      {
+        "link": "locations",
+        "title": "Locations"
+      },
+      {
+        "link": "departments",
+        "title": "Departments"
+      },
+      {
+        "link": "teams",
+        "title": "Teams"
+      },
+      {
+        "link": "blogs",
+        "title": "Blogs"
+      }
+    ]
+  }
+}

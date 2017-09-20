@@ -1,0 +1,25 @@
+<!-- <div class="container">
+	<h1>Content from: categories page</h1>
+</div>
+ -->
+
+ <div class="container">
+<div class="col-sm-8 col-sm-offset-2">
+  <!--   <div class="page-header"><h1>Post data using angularJS</h1></div> -->
+    <!-- FORM -->
+    <form>
+    <div class="form-group">
+        <label>Name</label>
+        <input type="text" name="name" class="form-control" ng-model="vm.categories.name">
+        <!-- <span ng-show="errorName">{{errorName}}</span> -->
+    </div>
+     <div class="form-group">
+        <label>description</label>
+        <textarea type="text" name="description" class="form-control" ng-model="vm.categories.description">
+        </textarea>
+        <!-- <span ng-show="errorName">{{errorName}}</span> -->
+    </div>
+       <button type="submit" class="btn btn-primary" ng-click="vm.editcategories()">create</button>
+    </form>
+</div>
+</div>

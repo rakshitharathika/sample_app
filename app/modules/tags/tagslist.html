@@ -1,0 +1,29 @@
+
+<div class="container-fluid">
+	<div style="float:right">
+		<a class="btn btn-success" ui-sref="categories">Add categories<i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+	</div>
+	<!-- table starts here -->
+  <table class="table table-striped table-bordered">
+    <thead class="">
+      <tr>
+      <th>Id</th>
+        <th>Name</th>
+         <th>description</th>
+        <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="tag in vm.tags">
+      <td>{{tag.id}}</td>
+        <td>{{tag.name}}</td>
+        <td>{{tag.description}}</td>
+         <td>
+         <a class="btn btn-info" ui-sref="tagsshow({id: tag.id})">Show</a>
+         <a class="btn btn-info" ui-sref="tagsedit({id: tag.id})">Edit</a></td>
+          </tr>
+      </tbody>
+	</table>
+		<!-- table ends here -->
+	</div>	  	
+   <!-- <td ui-sref="home.manageAssets.assetsshow({id: asset.id})" ng-click = "vm.manage(asset.id)">{{asset.name}}</td> -->

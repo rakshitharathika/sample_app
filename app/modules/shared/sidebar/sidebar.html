@@ -1,0 +1,835 @@
+
+  <style type="text/css">
+    body{
+      margin: 0;
+    }
+    .side-nav-container{
+      width: 100%;
+      /*background: #364150;*/
+      color: #b4bcc8;
+      /**/
+      /*overflow: scroll;*/
+    }
+    .company-logo{
+      background: #3b3f51;
+      margin-bottom: 30px;
+    }
+    .company-logo img{
+      display: block;
+      margin: auto;
+      height: 79px;
+      width: 50%;
+    }
+    .parent-menu, .child-menu, .sub-child-menu{
+      margin: 0;
+      padding: 0;
+    }
+    .parent-menu li{
+      list-style: none;
+      padding: 0;
+      position: relative;
+      color: #678098;
+    }
+    .parent-menu li:hover{
+      color: #5b9bd1;
+    }
+    .parent-menu li a, .child-menu li a, .sub-child-menu li a{
+      text-decoration: none;
+      color: inherit;
+      padding: 10px 15px 10px 50px;
+      display: block;
+    }
+    .child-menu li a{
+      padding: 10px 15px 10px 60px;
+      font-size: 14px;
+    }
+    .sub-child-menu li a{
+      padding: 10px 15px 10px 80px;
+      font-size: 12px;
+    }
+    .parent-menu li a:hover{
+      /*background: #2C3542;*/
+      background: #f2f6f9;
+      color: #5b9bd1;
+    }
+    .child-menu li a:hover{
+      background: #f2f6f9;
+      color: #5b9bd1;
+    }
+    .sub-child-menu li a:hover{
+      background: #f2f6f9;
+      color: #5b9bd1;
+    }
+    .parent-menu li i, .child-menu li i{
+      position: absolute;
+      left: 18px;
+      top: 12px;
+      font-size: 18px;
+    }
+    .child-menu li i{
+      left: 40px;
+      font-size: 14px;
+      top: 13px;
+    }
+    .sub-child-menu li i{
+      left: 55px;
+    }
+    .parent-menu li b{
+      position: absolute;
+      top: 10px;
+      right: 25px;
+      font-size: 20px;
+    }
+    .child-menu, .sub-child-menu{
+      display: none;
+    }
+    .click-back{
+      background: #f2f6f9;
+      color: #5b9bd1 !important;
+    }
+    .click-back2{
+      background: #f2f6f9;
+      color: #5b9bd1 !important;
+    }
+    .click-back3{
+      background: #f2f6f9;
+      color: #5b9bd1 !important;
+    }
+    .arrow{
+      color: #fff;
+    }
+    .rotate{
+      -ms-transform: rotate(-90deg); /* IE 9 */
+      -webkit-transform: rotate(-90deg); /* Safari */
+      transform: rotate(-90deg); /* Standard syntax *-90*/
+      color: #5b9bd1;
+    }
+    .header-container{
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 100;
+    }
+    .header-content{
+      /*background: #333b4c;*/
+      background: #3B3F51;
+      border-bottom: 1px solid #e9ecf3;
+      height: 80px;
+      line-height: 80px;
+      color: #fff;
+      padding: 0 30px;
+      display: block;
+      content: '';
+      clear: both;
+    }
+    .header-content ul{
+      padding: 0;
+      margin: 0;
+      float: right;
+    }
+    .header-content ul li{
+      list-style: none;
+      position: relative;
+      display: inline-block;
+      padding: 0 10px;
+      outline: none;
+      cursor: pointer;
+    }
+    /*.header-content ul li:hover{
+      background-color: #2C3542;
+    }*/
+    .header-content ul li i{
+      font-size: 18px;
+      line-height: 50px;
+    }
+    .header-content ul li label{
+      position: absolute;
+      background: #f66355;
+      height: 17px;
+      width: 17px;
+      border-radius: 50%;
+      line-height: 17px;
+      text-align: center;
+      font-size: 10px;
+      top: 10px;
+      left: 15px;
+      font-weight: bold;
+    }
+    .user-panel{
+      cursor: pointer;
+    }
+    /*.user-panel img{
+      height: 20px;
+      width: 20px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 1px solid #fff;
+      vertical-align: sub;
+    }*/
+    .user-panel b{
+
+    }
+    .user-popup{
+      position: absolute;
+      width: 165px;
+      background: #364150;
+      border-radius: 10px;
+      padding: 10px;
+      box-sizing: border-box;
+      top: 47px;
+      display: none;
+    }
+    .user-popup ul{
+      padding: 0;
+      margin: 0;
+    }
+    .user-popup ul li{
+      list-style: none;
+      margin: 0;
+      width: 100%;
+      padding: 0 10px;
+      box-sizing: border-box;
+    }
+    .user-popup ul li:hover{
+      background: #2C3542;
+    }
+    .user-popup ul li a{
+      text-decoration: none;
+      color: #fff;
+      font-size: 12px;
+    }
+    .user-popup ul li i{
+      font-size: 18px;
+      padding-right: 10px;
+    }
+  </style>
+
+    <!-- Side-nav content starts here -->
+    <div class="side-nav-container">
+      <div class="company-logo">
+        <img src="app/assets/images/fixnix-white-logo.png" alt="FIXNIX-WHITE-LOGO">
+      </div>
+      <ul class="parent-menu">
+        <li ng-show="sidebarResponse.is_admin">
+          <i class="fa fa-list-alt" aria-hidden="true"></i>
+          <a ui-sref="home.dashboard">Overview</a>
+          <b class="fa fa-angle-left"></b>
+          <ul class="child-menu">
+            <li>
+              <i class="fa fa-cog" aria-hidden="true"></i>
+              <a ui-sref="#">Admin Settings</a>
+              <b class="fa fa-angle-left"></b>
+              <ul class="sub-child-menu">
+                <li>
+                  <i class="fa fa-building" aria-hidden="true"></i>
+                  <a ui-sref="home.company">Company</a>
+                </li>
+                <li>
+                  <i class="fa fa-th-large" aria-hidden="true"></i>
+                  <a ui-sref="home.businessUnits">Business Unit</a>
+                </li>
+               <!--  <li>
+                  <i class="fa fa-connectdevelop" aria-hidden="true"></i>
+                  <a ui-sref="#">Departments</a>
+                </li>
+                <li>
+                  <i class="fa fa-users" aria-hidden="true"></i>
+                  <a ui-sref="#">Teams</a>
+                </li> -->
+                <li>
+                  <i class="fa fa-cubes" aria-hidden="true"></i>
+                  <a ui-sref="home.roles">Roles</a>
+                </li>
+                <li>
+                  <i class="fa fa-user" aria-hidden="true"></i>
+                  <a ui-sref="home.users">Users</a>
+                </li>
+                <!-- <li>
+                  <i class="fa fa-tasks" aria-hidden="true"></i>
+                  <a ui-sref="home.company_compliance_library">Compliance library</a>
+                </li> -->
+                 <li>
+                  <i class="fa fa-tasks" aria-hidden="true"></i>
+                  <a ui-sref="home.feed">Feed</a>
+                </li>
+                <li>
+                  <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                  <a ui-sref="home.billing">Billing</a>
+                </li>  
+              </ul>
+            </li>
+            <!-- <li>
+              <i class="fa fa-money" aria-hidden="true"></i>
+              <a ui-sref="#">Manage Payments</a>
+            </li> -->
+          </ul>
+        </li>
+        <span ng-show="sidebarResponse.is_admin == false">
+        <li>
+        
+          <i class="fa fa-file-text" aria-hidden="true"></i>
+          <a ui-sref="home.auditdashboard">Audit</a>
+          <b class="fa fa-angle-left"></b>
+          <ul class="child-menu">
+            <!-- <li> -->
+            
+              <!-- <i class="fa fa-tachometer" aria-hidden="true"></i>
+              <a ui-sref="home.auditdashboard">Dashboard</a> -->
+              <!-- <b class="fa fa-angle-left"></b>
+                <ul class="sub-child-menu">
+                   <li>
+                      <i class="fa fa-list" aria-hidden="true"></i>
+                      <a ui-sref="home.list">List</a>
+                    </li>
+                </ul> -->
+            <!-- </li> -->
+            <!-- <li>
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+              <a ui-sref="#">Clalendar</a>
+            </li> -->
+            
+           <!--  <li>
+              <i class="fa fa-list" aria-hidden="true"></i>
+              <a ui-sref="home.assetlist">List</a>
+            </li> -->
+            <li>
+               <i class="fa fa-file" aria-hidden="true"></i>
+               <a ui-sref="home.plan">Plan</a>
+            </li>
+            <li>
+              <i class="fa fa-hand-o-down" aria-hidden="true"></i>
+              <a ui-sref="home.list">Do</a>
+            </li>
+            <li>
+              <i class="fa fa-check-square" aria-hidden="true"></i>
+              <a ui-sref="home.list">Check</a>
+            </li>
+            <li>
+              <i class="fa fa-gavel" aria-hidden="true"></i>
+              <a ui-sref="home.list">Act</a>
+            </li>
+            <li>
+              <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>
+              <a ui-sref="home.list">Publish</a>
+            </li>
+            
+            <!-- <li>
+              <i class="fa fa-wrench" aria-hidden="true"></i>
+              <a ui-sref="#">Configure</a>
+              <b class="fa fa-angle-left"></b>
+                <ul class="sub-child-menu">
+                  <li>
+                    <i class="fa fa-archive" aria-hidden="true"></i>
+                    <a ui-sref="#">Weightage</a>
+                  </li>
+                  <li>
+                    <i class="fa fa-genderless" aria-hidden="true"></i>
+                    <a ui-sref="#">Artifacts</a>
+                  </li>
+                  <li>
+                    <i class="fa fa-bell-o" aria-hidden="true"></i>
+                    <a ui-sref="#">Remainder</a>
+                  </li>
+                </ul>
+            </li> -->
+          </ul>
+        </li>
+        <li>
+          <i class="fa fa-database" aria-hidden="true"></i>
+          <a ui-sref="home.assetdashboard">Asset</a>
+          <b class="fa fa-angle-left"></b>
+          <ul class="child-menu">
+            <!-- <li>
+              <i class="fa fa-tachometer" aria-hidden="true"></i>
+              <a >Dashboard</a>
+            </li> -->
+            <!-- <li>
+              <i class="fa fa-table" aria-hidden="true"></i>
+              <a ui-sref="#">TableView</a>
+            </li>
+            <li>
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+              <a ui-sref="#">Calender</a>
+            </li> -->
+          <!--   <li>
+              <i class="fa fa-database" aria-hidden="true"></i>
+              <a ui-sref="#">Assets</a>
+            </li> -->
+            <li>
+               <i class="fa fa-file" aria-hidden="true"></i>
+              <a ui-sref="home.manageAssets.assetregister">Plan</a>
+            </li>
+            <li>
+              <i class="fa fa-files-o" aria-hidden="true"></i>
+              <a ui-sref="home.assetlist">Assessment</a>
+            </li>
+            <li>
+              <i class="fa fa-gavel" aria-hidden="true"></i>
+              <a ui-sref="home.assetlist">Action</a>
+            </li>
+            <li>
+              <i class="fa fa-check" aria-hidden="true"></i>
+              <a ui-sref="home.assetlist">Review</a>
+            </li>
+            <!-- <li>
+              <i class="fa fa-wrench" aria-hidden="true"></i>
+              <a ui-sref="#">Configure</a>
+              <b class="fa fa-angle-left"></b>
+              <ul class="sub-child-menu">
+                <li>
+                  <i class="fa fa-list" aria-hidden="true"></i>
+                  <a ui-sref="#">Distribution List</a>
+                </li>
+              </ul>
+            </li> -->
+          </ul>
+        </li>
+         <li>
+          <i class="fa fa-bullhorn" aria-hidden="true"></i>
+          <a >Compliance</a>
+
+          <b class="fa fa-angle-left"></b>
+          <ul class="child-menu">
+            <li>
+              <i class="fa fa-tachometer" aria-hidden="true"></i>
+              <a ui-sref="home.complianceLibraray">Libraries</a>
+            </li>
+            <li>
+              <i class="fa fa-flag" aria-hidden="true"></i>
+              <a ui-sref="home.analysis">Analysis</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+          <a ui-sref="home.riskdashboard">Risk</a>
+          <b class="fa fa-angle-left"></b>
+          <ul class="child-menu">
+           <!--  <li>
+              <i class="fa fa-tachometer" aria-hidden="true"></i>
+              <a ui-sref="#">Dashboard</a>
+            </li> -->
+            <li>
+              <i class="fa fa-file" aria-hidden="true"></i>
+              <a ui-sref="home.riskplan">Plan</a>
+            </li>
+            <!-- <li>
+              <i class="fa fa-list-ol" aria-hidden="true"></i>
+              <a ui-sref="home.risklist">Listings</a>
+            </li> -->
+            <li>
+              <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+              <a ui-sref="home.risklist">Mitigate</a>
+            </li>
+            <li>
+              <i class="fa fa-check" aria-hidden="true"></i>
+              <a ui-sref="home.risklist">Review</a>
+            </li>
+            <!--  <li>
+              <i class="fa fa-registered" aria-hidden="true"></i>
+              <a ui-sref="home.riskregister">Risk Register</a>
+            </li> -->
+            <!-- <li>
+              <i class="fa fa-wrench" aria-hidden="true"></i>
+              <a ui-sref="#">Configure</a>
+              <b class="fa fa-angle-left"></b>
+              <ul class="sub-child-menu">
+                <li>
+                  <i class="fa fa-gamepad" aria-hidden="true"></i>
+                  <a ui-sref="#">Controls</a>
+                </li>
+                <li>
+                  <i class="fa fa-book" aria-hidden="true"></i>
+                  <a ui-sref="#">Procedures</a>
+                </li>
+                <li>
+                  <i class="fa fa-spinner" aria-hidden="true"></i>
+                  <a ui-sref="#">Process</a>
+                </li>
+                <li>
+                  <i class="fa fa-signal" aria-hidden="true"></i>
+                  <a ui-sref="#">Review Levels</a>
+                </li>
+                <li>
+                  <i class="fa fa-desktop" aria-hidden="true"></i>
+                  <a ui-sref="#">Projects</a>
+                </li>
+                <li>
+                  <i class="fa fa-exclamation" aria-hidden="true"></i>
+                  <a ui-sref="#">TypeOfRisk</a>
+                </li>
+                <li>
+                  <i class="fa fa-key" aria-hidden="true"></i>
+                  <a ui-sref="#">KPI</a>
+                </li>
+              </ul>
+            </li> -->
+          </ul>
+        </li>
+        <li>
+          <i class="fa fa-sticky-note-o" aria-hidden="true"></i>
+          <a ui-sref="home.policydashboard">Policy</a>
+          <b class="fa fa-angle-left"></b>
+          <ul class="child-menu">
+            <!-- <li>
+              <i class="fa fa-tachometer" aria-hidden="true"></i>
+              <a ui-sref="home.policydashboard">Dashboard</a>
+            </li> -->
+            <li>
+               <i class="fa fa-file" aria-hidden="true"></i>
+              <a ui-sref="home.policy">Plan</a>
+            </li>
+            <li>
+              <i class="fa fa-check" aria-hidden="true"></i>
+              <a ui-sref="home.policylist">Review</a>
+            </li>
+            <li>
+              <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+              <a ui-sref="home.policylist">Approve</a>
+            </li>
+            <li>
+              <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>
+              <a ui-sref="home.policylist">Publish</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <i class="fa fa-building" aria-hidden="true"></i>
+          <a ui-sref="#">BCPM</a>
+          <b class="fa fa-angle-left"></b>
+          <!-- <ul class="child-menu">
+            <li>
+              <i class="fa fa-tachometer" aria-hidden="true"></i>
+              <a ui-sref="#">Dashboard</a>
+            </li>
+            <li>
+              <i class="fa fa-line-chart" aria-hidden="true"></i>
+              <a ui-sref="#">Analysis</a>
+            </li>
+            <li>
+              <i class="fa fa-external-link" aria-hidden="true"></i>
+              <a ui-sref="#">Inventory</a>
+            </li>
+            <li>
+              <i class="fa fa-sticky-note-o" aria-hidden="true"></i>
+              <a ui-sref="#">Business Plan</a>
+            </li>
+            <li>
+              <i class="fa fa-list-alt" aria-hidden="true"></i>
+              <a ui-sref="#">Implementation</a>
+            </li>
+            <li>
+              <i class="fa fa-check-circle" aria-hidden="true"></i>
+              <a ui-sref="#">Acceptance</a>
+            </li>
+            <li>
+              <i class="fa fa-hdd-o" aria-hidden="true"></i>
+              <a ui-sref="#">Maintenance</a>
+            </li>
+            <li>
+              <i class="fa fa-wrench" aria-hidden="true"></i>
+              <a ui-sref="#">Configure</a>
+              <b class="fa fa-angle-left"></b>
+              <ul class="sub-child-menu">
+                <li>
+                  <i class="fa fa-sticky-note-o" aria-hidden="true"></i>
+                  <a ui-sref="#">Business Process</a>
+                </li>
+                <li>
+                  <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                  <a ui-sref="#">Threats</a>
+                </li>
+                <li>
+                  <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+                  <a ui-sref="#">Vulnerabilites</a>
+                </li>
+              </ul>
+            </li>
+          </ul> -->
+          <ul class="child-menu">
+            <li>
+              <i class="fa fa-briefcase" aria-hidden="true"></i>
+              <a ui-sref="#">BCP</a>
+              <b class="fa fa-angle-left"></b>
+              <ul class="sub-child-menu">
+                <li>
+                  <i class="fa fa-user" aria-hidden="true"></i>
+                  <a ui-sref="home.bcpmadmin">Admin</a>
+                </li>
+                <li>
+                  <i class="fa fa-file" aria-hidden="true"></i>
+                  <a ui-sref="home.bcpmplan1">Plan</a>
+                </li>
+                <li>
+                  <i class="fa fa fa-gavel" aria-hidden="true"></i>
+                  <a ui-sref="home.bcpm2ndplan">Implement</a>
+                </li>
+                <li>
+                  <i class="fa fa-server" aria-hidden="true"></i>
+                  <a ui-sref="home.bcpmmaintanance">Maintenance</a>
+                </li>
+                <li>
+                  <i class="fa fa-tasks" aria-hidden="true"></i>
+                  <a ui-sref="home.bcpmexercise">Exercise</a>
+                </li>
+                <li>
+                  <i class="fa fa-bug" aria-hidden="true"></i>
+                  <a ui-sref="home.bcpmreport">Report</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <i class="fa fa-fire-extinguisher" aria-hidden="true"></i>
+              <a ui-sref="home.dmplaning">Disaster Management</a>
+              <b class="fa fa-angle-left"></b>
+              <ul class="sub-child-menu">
+                <li>
+                  <i class="fa fa-sticky-note-o" aria-hidden="true"></i>
+                  <a ui-sref="home.dmplaning">Plan</a>
+                </li>
+                <li>
+                  <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                  <a ui-sref="home.dmstrategy">Strategy</a>
+                </li>
+                <li>
+                  <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+                  <a ui-sref="home.dmtesting">Testing</a>
+                </li>
+                <li>
+                  <i class="fa fa fa-thumbs-up" aria-hidden="true"></i>
+                  <a ui-sref="home.dmtraining_approval">Training & Approval</a>
+                </li>
+                <li>
+                  <i class="fa fa-bug" aria-hidden="true"></i>
+                  <a ui-sref="home.dmreport">Report</a>
+                </li>
+              </ul>
+            </li>
+          </ul>  
+        </li>
+        <li>
+          <i class="fa fa-indent" aria-hidden="true"></i>
+          <a ui-sref="home.incidentdashboard">Incident</a>
+          <b class="fa fa-angle-left"></b>
+          <ul class="child-menu">
+            <!-- <li>
+              <i class="fa fa-tachometer" aria-hidden="true"></i>
+              <a ui-sref="home.incidentdashboard">Dashboard</a>
+            </li> -->
+            <!-- <li>
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+              <a ui-sref="#">Calender</a>
+            </li>
+            <li>
+              <i class="fa fa-list-ol" aria-hidden="true"></i>
+              <a ui-sref="home.incidentlist">Listings</a>
+            </li> -->
+            <li>
+              <i class="fa fa-file-text" aria-hidden="true"></i>
+              <a ui-sref="home.incident">File</a>
+            </li>
+            <li>
+              <i class="fa fa-bullseye" aria-hidden="true"></i>
+              <a ui-sref="home.incidentlist">Diagnosis</a>
+            </li>
+            <li>
+              <i class="fa fa-archive" aria-hidden="true"></i>
+              <a ui-sref="home.incidentlist">Resolution</a>
+            </li>
+            <li>
+              <i class="fa fa-crosshairs" aria-hidden="true"></i>
+              <a ui-sref="home.incidentlist">Closure</a>
+            </li>
+            <!-- <li>
+              <i class="fa fa-cog" aria-hidden="true"></i>
+              <a ui-sref="#">Settings</a>
+              <b class="fa fa-angle-left"></b>
+              <ul class="sub-child-menu">
+                <li>
+                  <i class="fa fa-list" aria-hidden="true"></i>
+                  <a ui-sref="#">Distribution List</a>
+                </li>
+              </ul>
+            </li> -->
+          </ul>
+        </li>
+        <li>
+          <i class="fa fa-search" aria-hidden="true"></i>
+          <a ui-sref="#">Control</a>
+          <b class="fa fa-angle-left"></b>
+          <ul class="child-menu">
+<!--             <li>
+              <i class="fa fa-tachometer" aria-hidden="true"></i>
+              <a ui-sref="#">Dashboard</a>
+            </li> -->
+            <li>
+              <i class="fa fa-list-ol" aria-hidden="true"></i>
+              <a ui-sref="home.controllist">Listings</a>
+            </li>
+            <li>
+              <i class="fa fa-search" aria-hidden="true"></i>
+              <a ui-sref="home.control">Control</a>
+            </li>               
+<!--             <li>
+              <i class="fa fa-search" aria-hidden="true"></i>
+              <a ui-sref="#">Control</a>
+            </li> -->
+            <li>
+              <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+              <a ui-sref="home.procedure">Procedure</a>
+            </li>
+<!--             <li>
+              <i class="fa fa-check" aria-hidden="true"></i>
+              <a ui-sref="#">Review</a>
+            </li>
+            <li>
+              <i class="fa fa-file-text" aria-hidden="true"></i>
+              <a ui-sref="#">Audit</a>
+            </li>
+            <li>
+              <i class="fa fa-cog" aria-hidden="true"></i>
+              <a ui-sref="#">Settings</a>
+              <b class="fa fa-angle-left"></b>
+              <ul class="sub-child-menu">
+                <li>
+                  <i class="fa fa-list" aria-hidden="true"></i>
+                  <a ui-sref="#">Distribution List</a>
+                </li> -->
+              <!-- </ul> -->
+            <!-- </li> -->
+          </ul>
+        </li>
+        <li>
+          <i class="fa fa-ban" aria-hidden="true"></i>
+          <a ui-sref="home.frauddashboard">Fraud</a>
+          <b class="fa fa-angle-left"></b>
+          <ul class="child-menu">
+            <!-- <li>
+              <i class="fa fa-tachometer" aria-hidden="true"></i>
+              <a ui-sref="home.frauddashboard">Dashboard</a>
+            </li> -->
+            <li>
+              <i class="fa fa-registered" aria-hidden="true"></i>
+              <a ui-sref="home.fraud">Fraud Registry</a>
+            </li>
+<!--             <li>
+              <i class="fa fa-external-link" aria-hidden="true"></i>
+              <a ui-sref="home.fraudlist">Fraud Inventory</a>
+            </li> -->
+            <li>
+              <i class="fa fa-search" aria-hidden="true"></i>
+              <a ui-sref="home.fraudlist">Fraud Investigation</a>
+            </li>
+            <li>
+              <i class="fa fa-check" aria-hidden="true"></i>
+              <a ui-sref="home.fraudlist">Fraud Review</a>
+            </li>
+<!--             <li>
+              <i class="fa fa-cog" aria-hidden="true"></i>
+              <a ui-sref="#">Configure</a>
+              <b class="fa fa-angle-left"></b>
+              <ul class="sub-child-menu">
+                <li>
+                  <i class="fa fa-list" aria-hidden="true"></i>
+                  <a ui-sref="#">Fraud Types</a>
+                </li> -->
+                  
+
+              </ul>
+            </li>
+            <li>
+          <i class="fa fa-link" aria-hidden="true"></i>
+          <a ui-sref="home.quicklinks">Quick Links</a>
+          <b class="fa fa-angle-left"></b>
+          <!-- <ul class="child-menu">
+            <li>
+              <i class="fa fa-tachometer" aria-hidden="true"></i>
+              <a ui-sref="#">Dashboard</a>
+            </li>
+            <li>
+              <i class="fa fa-list-ol" aria-hidden="true"></i>
+              <a ui-sref="#">Listings</a>
+            </li>
+            <li>
+              <i class="fa fa-search" aria-hidden="true"></i>
+              <a ui-sref="#">Control</a>
+            </li>
+            <li>
+              <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+              <a ui-sref="#">Approval</a>
+            </li>
+            <li>
+              <i class="fa fa-check" aria-hidden="true"></i>
+              <a ui-sref="#">Review</a>
+            </li>
+            <li>
+              <i class="fa fa-file-text" aria-hidden="true"></i>
+              <a ui-sref="#">Audit</a>
+            </li>
+            <li>
+              <i class="fa fa-cog" aria-hidden="true"></i>
+              <a ui-sref="#">Settings</a>
+              <b class="fa fa-angle-left"></b>
+              <ul class="sub-child-menu">
+                <li>
+                  <i class="fa fa-list" aria-hidden="true"></i>
+                  <a ui-sref="#">Distribution List</a>
+                </li>
+              </ul>
+            </li>
+          </ul> -->
+        </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <!-- Side-nav content end here -->
+  </div>
+  <!-- Header content end here -->  
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $(".user-panel").hover(function(){
+        $(".user-popup").fadeToggle(300);
+      });
+      $(".parent-menu li").click(function(){
+        $(this).children(".child-menu").slideDown();
+        $(this).siblings().children(".child-menu").slideUp();
+        $(this).children("a").addClass("click-back");
+        $(this).siblings().children("a").removeClass("click-back");
+        $(this).children("i").addClass("click-back");
+        $(this).siblings().children("i").removeClass("click-back");
+        $(this).children("b").addClass("arrow rotate");
+        $(this).siblings().children("b").removeClass("arrow rotate");
+      });
+
+      $(".child-menu li").click(function(){
+        $(this).children(".sub-child-menu").slideDown();
+        $(this).siblings().children(".sub-child-menu").slideUp();
+        $(this).children("a").addClass("click-back2");
+        $(this).siblings().children("a").removeClass("click-back2");
+        $(this).children("i").addClass("click-back2");
+        $(this).siblings().children("i").removeClass("click-back2");
+        $(this).children("b").addClass("arrow rotate");
+        $(this).siblings().children("b").removeClass("arrow rotate");
+      });
+
+      $(".sub-child-menu li").click(function(){
+        $(this).children("a").addClass("click-back3");
+        $(this).siblings().children("a").removeClass("click-back3");
+        $(this).children("i").addClass("click-back3");
+        $(this).siblings().children("i").removeClass("click-back3");
+      });
+      // $(window).resize(function() {
+      //   heightAdj();
+      // });
+      // heightAdj();
+      // function heightAdj(){
+      //   var body = $(document).height();
+      //   // console.log(body);
+      //   // var header = $(".header-content").outerHeight();
+      //   $(".side-nav-container").outerHeight(body);
+      // }
+    });
+  </script>
+ <!--  <script type="text/javascript">
+        introJs().start();
+        introJs().addHints();
+      </script> -->

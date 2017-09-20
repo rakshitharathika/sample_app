@@ -1,0 +1,40 @@
+
+<div class="container-fluid">
+	<div style="float:right">
+		<a class="btn btn-success" ui-sref="blogs">Add blog<i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+	</div>
+	<!-- table starts here -->
+  <table class="table table-striped table-bordered">
+    <thead class="">
+      <tr>
+      <th>Id</th>
+        <th>title</th>
+         <th>user</th>
+         <th>categories</th>
+        <th>tags</th>
+         <th>location</th>
+          <th>department</th>
+          <th>team</th>
+          <th>Action</th>
+
+        </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="blogs in vm.blog">
+      <td>{{blogs.id}}</td>
+      <td>{{blogs.title}}</td>
+        <td>{{blogs.user.name}}</td>
+         <td>{{blogs.categories.name}}</td>
+        <td>{{blogs.tags.name}}</td>
+        <td>{{blogs.location.name}}</td>
+        <td>{{blogs.department.name}}</td>
+        <td>{{blogs.team.name}}</td>
+         <td>
+         <a class="btn btn-info" ui-sref="blogsshow({id: blogs.id})">Show</a>
+         <a class="btn btn-info" ui-sref="blogsedit({id: blogs.id})">Edit</a></td>
+          </tr>
+      </tbody>
+	</table>
+		<!-- table ends here -->
+	</div>	  	
+   <!-- <td ui-sref="home.manageAssets.assetsshow({id: asset.id})" ng-click = "vm.manage(asset.id)">{{asset.name}}</td> -->
